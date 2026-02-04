@@ -1,0 +1,15 @@
+{
+  "appId": "com.rentit.app",
+  "appName": "RentIt",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https",
+    "cleartext": true
+  },
+  "android": {
+    "buildOptions": {
+      "keystorePath": "",
+      "keystoreAlias": ""
+    }
+  }
+}
