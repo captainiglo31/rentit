@@ -4,7 +4,8 @@ public class Booking
 {
     public Guid Id { get; set; }
     public Guid TenantId { get; set; }
-    public Guid UserId { get; set; }
+    public Guid UserId { get; set; } // Staff/User who created the booking
+    public Guid? CustomerId { get; set; } // The customer renting the article
     public Guid ArticleId { get; set; }
     public DateTime StartTime { get; set; }
     public DateTime EndTime { get; set; }
@@ -29,6 +30,7 @@ public class Booking
     // Navigation properties
     public Tenant Tenant { get; set; } = null!;
     public User User { get; set; } = null!;
+    public Customer? Customer { get; set; }
     public Article Article { get; set; } = null!;
 }
 
