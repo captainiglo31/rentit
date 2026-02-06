@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Customer-Centric Weekly Planner V1</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#256af4",
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#101622",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1e293b",
+                        "border-light": "#e2e8f0",
+                        "border-dark": "#334155",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>.no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white overflow-hidden h-screen flex flex-col">
+<header class="flex-none bg-surface-light dark:bg-surface-dark px-4 py-3 flex items-center justify-between border-b border-border-light dark:border-border-dark shadow-sm z-20">
+<div class="flex items-center gap-3">
+<button class="p-2 -ml-2 rounded-full hover:bg-background-light dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined text-[24px]">menu</span>
+</button>
+<h1 class="text-xl font-bold tracking-tight">Kundenplaner</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-2 bg-background-light dark:bg-slate-700 px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">
+<span class="material-symbols-outlined text-[20px]">calendar_month</span>
+<span>Okt 2023</span>
+</button>
+<button class="p-2 rounded-full hover:bg-background-light dark:hover:bg-slate-700 transition-colors text-primary">
+<span class="material-symbols-outlined text-[24px]">search</span>
+</button>
+</div>
+</header>
+<div class="flex-none bg-surface-light dark:bg-surface-dark pt-2 pb-3 px-4 flex gap-3 overflow-x-auto no-scrollbar border-b border-border-light dark:border-border-dark z-10">
+<div class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-slate-900 dark:bg-primary px-4 shadow-sm cursor-pointer">
+<span class="text-white text-sm font-semibold">Woche 42</span>
+<span class="material-symbols-outlined text-white text-[18px]">expand_more</span>
+</div>
+<div class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-background-light dark:bg-slate-700 px-4 border border-border-light dark:border-border-dark cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-600">
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-300 text-[18px]">filter_list</span>
+<p class="text-slate-700 dark:text-slate-200 text-sm font-medium">Alle Status</p>
+</div>
+<div class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-primary/10 dark:bg-primary/20 px-4 border border-primary/20 cursor-pointer">
+<span class="material-symbols-outlined text-primary text-[18px]">rv_hookup</span>
+<p class="text-primary text-sm font-bold">Mit Wagen</p>
+</div>
+</div>
+<main class="flex-1 relative overflow-hidden flex flex-col">
+<div class="flex border-b border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark">
+<div class="w-[140px] shrink-0 border-r border-border-light dark:border-border-dark p-3 bg-surface-light dark:bg-surface-dark z-20 shadow-[4px_0_10px_-5px_rgba(0,0,0,0.1)] flex items-end">
+<span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Kunde</span>
+</div>
+<div class="flex-1 overflow-hidden">
+<div class="flex min-w-[600px]"> 
+<div class="flex-1 h-10 flex flex-col items-center justify-center border-r border-border-light dark:border-border-dark bg-slate-50 dark:bg-slate-800/50">
+<span class="text-xs font-bold text-slate-700 dark:text-slate-300">Mo 16</span>
+</div>
+<div class="flex-1 h-10 flex flex-col items-center justify-center border-r border-border-light dark:border-border-dark bg-slate-50 dark:bg-slate-800/50">
+<span class="text-xs font-bold text-slate-700 dark:text-slate-300">Di 17</span>
+</div>
+<div class="flex-1 h-10 flex flex-col items-center justify-center border-r border-border-light dark:border-border-dark bg-slate-50 dark:bg-slate-800/50">
+<span class="text-xs font-bold text-slate-900 dark:text-white">Mi 18</span>
+</div>
+<div class="flex-1 h-10 flex flex-col items-center justify-center border-r border-border-light dark:border-border-dark bg-slate-50 dark:bg-slate-800/50">
+<span class="text-xs font-bold text-slate-900 dark:text-white">Do 19</span>
+</div>
+<div class="flex-1 h-10 flex flex-col items-center justify-center border-r border-border-light dark:border-border-dark bg-slate-50 dark:bg-slate-800/50">
+<span class="text-xs font-bold text-slate-900 dark:text-white">Fr 20</span>
+</div>
+<div class="flex-1 h-10 flex flex-col items-center justify-center border-r border-border-light dark:border-border-dark bg-slate-100 dark:bg-slate-800">
+<span class="text-xs font-bold text-primary">Sa 21</span>
+</div>
+<div class="flex-1 h-10 flex flex-col items-center justify-center border-r border-border-light dark:border-border-dark bg-slate-100 dark:bg-slate-800">
+<span class="text-xs font-bold text-primary">So 22</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto overflow-x-auto relative">
+<div class="flex min-w-[740px]"> 
+<div class="w-[140px] sticky left-0 z-10 bg-surface-light dark:bg-surface-dark border-r border-border-light dark:border-border-dark flex flex-col shadow-[4px_0_10px_-5px_rgba(0,0,0,0.1)]">
+<div class="h-20 border-b border-border-light dark:border-border-dark p-2 flex flex-col justify-center gap-1 group bg-primary/5 dark:bg-primary/10 relative">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-[10px] font-bold text-blue-700 dark:text-blue-300">KM</div>
+<span class="text-xs font-bold text-slate-900 dark:text-white truncate">Kunde Müller</span>
+</div>
+<span class="text-[10px] text-slate-500 dark:text-slate-400 truncate pl-8">Stammkunde</span>
+</div>
+<div class="h-20 border-b border-border-light dark:border-border-dark p-2 flex flex-col justify-center gap-1">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-orange-100 dark:bg-orange-900 flex items-center justify-center text-[10px] font-bold text-orange-700 dark:text-orange-300">GH</div>
+<span class="text-xs font-medium text-slate-700 dark:text-slate-300 truncate">Getränke Haus</span>
+</div>
+<span class="text-[10px] text-slate-500 dark:text-slate-400 truncate pl-8">Großabnehmer</span>
+</div>
+<div class="h-20 border-b border-border-light dark:border-border-dark p-2 flex flex-col justify-center gap-1">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-emerald-100 dark:bg-emerald-900 flex items-center justify-center text-[10px] font-bold text-emerald-700 dark:text-emerald-300">SV</div>
+<span class="text-xs font-medium text-slate-700 dark:text-slate-300 truncate">Sportverein</span>
+</div>
+<span class="text-[10px] text-slate-500 dark:text-slate-400 truncate pl-8">Veranstaltung</span>
+</div>
+<div class="h-20 border-b border-border-light dark:border-border-dark p-2 flex flex-col justify-center gap-1">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-[10px] font-bold text-slate-600 dark:text-slate-400">SK</div>
+<span class="text-xs font-medium text-slate-700 dark:text-slate-300 truncate">Stadtfest K.</span>
+</div>
+<span class="text-[10px] text-slate-500 dark:text-slate-400 truncate pl-8">Einmalig</span>
+</div>
+</div>
+<div class="flex-1 flex flex-col relative bg-white dark:bg-[#151b26]">
+<div class="absolute inset-0 flex pointer-events-none">
+<div class="flex-1 border-r border-border-light dark:border-border-dark border-dashed"></div>
+<div class="flex-1 border-r border-border-light dark:border-border-dark border-dashed"></div>
+<div class="flex-1 border-r border-border-light dark:border-border-dark border-dashed"></div>
+<div class="flex-1 border-r border-border-light dark:border-border-dark border-dashed"></div>
+<div class="flex-1 border-r border-border-light dark:border-border-dark border-dashed"></div>
+<div class="flex-1 border-r border-border-light dark:border-border-dark border-dashed bg-slate-50/50 dark:bg-slate-800/20"></div>
+<div class="flex-1 border-r border-border-light dark:border-border-dark border-dashed bg-slate-50/50 dark:bg-slate-800/20"></div>
+</div>
+<div class="h-20 border-b border-border-light dark:border-border-dark relative w-full flex items-center">
+<div class="absolute left-[28.57%] w-[42.85%] h-14 bg-primary rounded-md shadow-md flex items-center justify-center px-2 z-10 cursor-pointer hover:bg-blue-600 transition-colors group/block ring-2 ring-white dark:ring-slate-800">
+<div class="flex items-center justify-evenly w-full text-white">
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-[16px]">rv_hookup</span>
+<span class="text-[9px] font-bold leading-none mt-0.5">x1</span>
+</div>
+<div class="w-px h-6 bg-white/20"></div>
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-[16px]">kitchen</span>
+<span class="text-[9px] font-bold leading-none mt-0.5">x2</span>
+</div>
+<div class="w-px h-6 bg-white/20"></div>
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-[16px]">local_bar</span>
+<span class="text-[9px] font-bold leading-none mt-0.5">x5</span>
+</div>
+<div class="w-px h-6 bg-white/20"></div>
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-[16px]">inventory_2</span>
+<span class="text-[9px] font-bold leading-none mt-0.5">x10</span>
+</div>
+</div>
+</div>
+</div>
+<div class="h-20 border-b border-border-light dark:border-border-dark relative w-full flex items-center">
+<div class="absolute left-[0%] w-[28.57%] h-14 bg-slate-200 dark:bg-slate-700 rounded-md flex items-center justify-center px-2 z-10 border border-slate-300 dark:border-slate-600">
+<div class="flex items-center gap-3 text-slate-600 dark:text-slate-300">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">inventory_2</span>
+<span class="text-[10px] font-bold">x40</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">local_bar</span>
+<span class="text-[10px] font-bold">x12</span>
+</div>
+</div>
+</div>
+</div>
+<div class="h-20 border-b border-border-light dark:border-border-dark relative w-full flex items-center">
+<div class="absolute left-[71.42%] w-[14.28%] h-14 bg-emerald-500/90 rounded-md shadow-sm flex items-center justify-center px-1">
+<div class="flex flex-col items-center text-white">
+<span class="material-symbols-outlined text-[16px]">kebab_dining</span>
+<span class="text-[9px] font-bold">Grill</span>
+</div>
+</div>
+</div>
+<div class="h-20 border-b border-border-light dark:border-border-dark relative w-full flex items-center">
+<div class="absolute left-[57.14%] w-[42.85%] h-14 bg-slate-800 dark:bg-slate-600 rounded-l-md shadow-sm flex items-center px-3 gap-2 border-r-4 border-amber-400">
+<div class="flex items-center gap-3 text-white">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">rv_hookup</span>
+<span class="text-[10px] font-bold">x2</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">chair</span>
+<span class="text-[10px] font-bold">x50</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<aside class="flex-none bg-surface-light dark:bg-surface-dark border-t border-border-light dark:border-border-dark shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] z-30 pb-safe">
+<div class="flex flex-col px-5 py-4 gap-4">
+<div class="w-12 h-1 bg-slate-200 dark:bg-slate-700 rounded-full mx-auto mb-1"></div>
+<div class="flex items-start justify-between">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<h2 class="text-lg font-bold text-slate-900 dark:text-white">Auftrag #4021</h2>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 uppercase tracking-wide">Bestätigt</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400">Kunde Müller • <span class="font-semibold text-primary">Mi 18. - Sa 21. Okt</span></p>
+</div>
+<button class="text-primary hover:bg-primary/10 p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+<div class="grid grid-cols-1 gap-3 max-h-[220px] overflow-y-auto pr-1">
+<div class="flex items-center justify-between p-2 rounded-lg bg-background-light dark:bg-slate-800/50 border border-border-light dark:border-border-dark">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">rv_hookup</span>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-900 dark:text-white">Ausschankwagen A</p>
+<p class="text-xs text-slate-500">Großer Anhänger</p>
+</div>
+</div>
+<span class="text-sm font-bold text-slate-900 dark:text-white bg-white dark:bg-slate-700 px-2 py-1 rounded border border-border-light dark:border-border-dark">1x</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-background-light dark:bg-slate-800/50 border border-border-light dark:border-border-dark">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-blue-50 dark:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined">kitchen</span>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-900 dark:text-white">Kühltruhe</p>
+<p class="text-xs text-slate-500">Modell L (300L)</p>
+</div>
+</div>
+<span class="text-sm font-bold text-slate-900 dark:text-white bg-white dark:bg-slate-700 px-2 py-1 rounded border border-border-light dark:border-border-dark">2x</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-background-light dark:bg-slate-800/50 border border-border-light dark:border-border-dark">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-blue-50 dark:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined">local_bar</span>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-900 dark:text-white">Gläser-Sets</p>
+<p class="text-xs text-slate-500">Pils (0.3L) - 50er</p>
+</div>
+</div>
+<span class="text-sm font-bold text-slate-900 dark:text-white bg-white dark:bg-slate-700 px-2 py-1 rounded border border-border-light dark:border-border-dark">5x</span>
+</div>
+<div class="mt-2 text-xs font-semibold text-slate-400 uppercase tracking-wider pl-1">Zusatzartikel</div>
+<div class="grid grid-cols-2 gap-3">
+<div class="flex items-center justify-between p-2 rounded-lg bg-orange-50 dark:bg-orange-900/20 border border-orange-100 dark:border-orange-800/30">
+<div class="flex items-center gap-2 overflow-hidden">
+<span class="material-symbols-outlined text-orange-600 text-[18px]">liquor</span>
+<span class="text-sm font-medium text-orange-900 dark:text-orange-100 truncate">Wodka</span>
+</div>
+<span class="text-xs font-bold text-orange-800 dark:text-orange-200">30x</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800/30">
+<div class="flex items-center gap-2 overflow-hidden">
+<span class="material-symbols-outlined text-emerald-600 text-[18px]">inventory_2</span>
+<span class="text-sm font-medium text-emerald-900 dark:text-emerald-100 truncate">Kiste Veltins</span>
+</div>
+<span class="text-xs font-bold text-emerald-800 dark:text-emerald-200">10x</span>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<button class="absolute bottom-[320px] right-4 size-14 bg-primary text-white rounded-2xl shadow-lg shadow-blue-500/30 flex items-center justify-center hover:bg-blue-600 transition-transform active:scale-95 z-40">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+
+</body></html>

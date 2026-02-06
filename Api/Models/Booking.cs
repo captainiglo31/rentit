@@ -4,6 +4,10 @@ public class Booking
 {
     public Guid Id { get; set; }
     public Guid TenantId { get; set; }
+    
+    public Guid? OrderId { get; set; }
+    public Order? Order { get; set; }
+
     public Guid UserId { get; set; } // Staff/User who created the booking
     public Guid? CustomerId { get; set; } // The customer renting the article
     public Guid ArticleId { get; set; }

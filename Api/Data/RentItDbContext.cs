@@ -20,6 +20,8 @@ public class RentItDbContext : DbContext
     public DbSet<Category> Categories { get; set; }
     public DbSet<Article> Articles { get; set; }
     public DbSet<Booking> Bookings { get; set; }
+    public DbSet<Order> Orders { get; set; }
+    public DbSet<OrderPosition> OrderPositions { get; set; }
     public DbSet<BufferRule> BufferRules { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -147,6 +149,28 @@ public class RentItDbContext : DbContext
 
             // Index for checking booking conflicts (considering buffer time)
             entity.HasIndex(e => new { e.ArticleId, e.StartTime, e.EndTime });
+
+            entity.HasOne(e => e.Order)
+                .WithMany(o => o.Bookings)
+                .HasForeignKey(e => e.OrderId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        // Configure Order entity
+        modelBuilder.Entity<Order>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.HasOne(e => e.Customer).WithMany().HasForeignKey(e => e.CustomerId).OnDelete(DeleteBehavior.Restrict);
+            entity.HasQueryFilter(e => e.TenantId == _tenantProvider.GetCurrentTenantId());
+        });
+
+        // Configure OrderPosition
+        modelBuilder.Entity<OrderPosition>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Price).HasPrecision(18, 2);
+            entity.HasOne(e => e.Order).WithMany(o => o.OrderPositions).HasForeignKey(e => e.OrderId).OnDelete(DeleteBehavior.Cascade);
+            entity.HasQueryFilter(e => e.TenantId == _tenantProvider.GetCurrentTenantId());
         });
     }
 }

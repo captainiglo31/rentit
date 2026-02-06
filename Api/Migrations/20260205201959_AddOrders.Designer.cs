@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RentIt.Api.Data;
@@ -11,9 +12,11 @@ using RentIt.Api.Data;
 namespace RentIt.Api.Migrations
 {
     [DbContext(typeof(RentItDbContext))]
-    partial class RentItDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260205201959_AddOrders")]
+    partial class AddOrders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -459,7 +462,7 @@ namespace RentIt.Api.Migrations
 
             modelBuilder.Entity("RentIt.Api.Models.Order", b =>
                 {
-                    b.HasOne("RentIt.Api.Models.Customer", "Customer")
+                    b.HasOne("RentIt.Api.Models.User", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Restrict)

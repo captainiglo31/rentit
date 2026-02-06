@@ -1,0 +1,77 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run Migrations",
+			"type": "shell",
+			"command": "dotnet ef migrations add FixOrderCustomerRelation -p Api && dotnet ef database update -p Api",
+			"group": "build"
+		},
+		{
+			"label": "Run Migrations Fixed",
+			"type": "shell",
+			"command": "dotnet ef migrations add FixOrderCustomerRelation -p Api; dotnet ef database update -p Api",
+			"group": "build"
+		},
+		{
+			"label": "Migrate Add",
+			"type": "shell",
+			"command": "dotnet ef migrations add FixOrderCustomerRelation -p Api",
+			"group": "build"
+		},
+		{
+			"label": "Build Api",
+			"type": "shell",
+			"command": "dotnet build -p Api",
+			"group": "build"
+		},
+		{
+			"label": "Migrate Add Retry",
+			"type": "shell",
+			"command": "dotnet ef migrations add FixOrderCustomerRelation -p Api",
+			"group": "build"
+		},
+		{
+			"label": "Migrate Final",
+			"type": "shell",
+			"command": "dotnet ef migrations add FixOrderCustomerRelation -p Api; dotnet ef database update -p Api",
+			"group": "build"
+		},
+		{
+			"label": "Clean Build",
+			"type": "shell",
+			"command": "dotnet build Api/RentIt.Api.csproj",
+			"group": "build"
+		},
+		{
+			"label": "Migrate Again",
+			"type": "shell",
+			"command": "dotnet ef migrations add FixOrderCustomerRelation -p Api && dotnet ef database update -p Api",
+			"group": "build"
+		},
+		{
+			"label": "Migrate Again 2",
+			"type": "shell",
+			"command": "dotnet ef migrations add FixOrderCustomerRelation -p Api; dotnet ef database update -p Api",
+			"group": "build"
+		},
+		{
+			"label": "Kill RentIt",
+			"type": "shell",
+			"command": "./kill-rentit.ps1",
+			"group": "build"
+		},
+		{
+			"label": "Kill RentIt 2",
+			"type": "shell",
+			"command": "./kill-rentit.ps1",
+			"group": "build"
+		},
+		{
+			"label": "Migrate Final Real",
+			"type": "shell",
+			"command": "dotnet ef migrations add FixOrderCustomerRelation -p Api; dotnet ef database update -p Api",
+			"group": "build"
+		}
+	]
+}
