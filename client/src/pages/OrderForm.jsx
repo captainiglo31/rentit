@@ -26,9 +26,11 @@ export default function OrderForm() {
         startTime: formatDate(defaultStart),
         endTime: formatDate(defaultEnd),
         articleId: '',
-        customerId: '', // Placeholder, dealing with nullable CustomerId
-        customerName: '', // Just for UI if needed, but not part of BookingRequest unless we create customer
-        status: 0 // Confirmed
+        customerId: '',
+        customerName: '', 
+        customerEmail: '',
+        customerPhone: '',
+        status: 0 
     });
 
     const [price, setPrice] = useState(0);
@@ -102,16 +104,20 @@ export default function OrderForm() {
     const mutation = useMutation({
         mutationFn: async (data) => {
             const payload = {
-                articleId: data.articleId,
-                customerId: null, // nullable for now
-                startTime: data.startTime,
-                endTime: data.endTime,
-                totalPrice: price,
-                status: 0 // Confirmed
+                // Ensure we have a valid format for list of bookings if backend expects it
+                bookings: [{ articleId: data.articleId, quantity: 1 }], 
+                customerId: data.customerId || "00000000-0000-0000-0000-000000000000",
+                customerName: data.customerName, 
+                customerEmail: data.customerEmail,
+                customerPhone: data.customerPhone,
+                startDate: data.startTime,
+                endDate: data.endTime,
+                customPositions: []
             };
-            await api.post('/bookings', payload);
+            await api.post('/orders', payload);
         },
         onSuccess: () => {
+            queryClient.invalidateQueries(['orders']); // Fix cache key (was bookings for simple tool, now orders)
             queryClient.invalidateQueries(['bookings']);
             navigate('/');
         },
@@ -151,6 +157,44 @@ export default function OrderForm() {
                 )}
 
                 <form onSubmit={handleSubmit} className="space-y-6 bg-gray-50 dark:bg-slate-800 p-6 rounded-lg shadow-sm border border-gray-100 dark:border-slate-700">
+                    
+                    {/* Customer Selection or Input */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="md:col-span-2">
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Customer Name</label>
+                            <input
+                                type="text"
+                                name="customerName"
+                                required
+                                placeholder="e.g. Max Mustermann"
+                                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-slate-700 dark:border-slate-600 dark:text-white sm:text-sm"
+                                value={formData.customerName}
+                                onChange={(e) => setFormData({ ...formData, customerName: e.target.value })}
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Phone</label>
+                            <input
+                                type="tel"
+                                name="customerPhone"
+                                placeholder="+49 123 456789"
+                                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-slate-700 dark:border-slate-600 dark:text-white sm:text-sm"
+                                value={formData.customerPhone}
+                                onChange={(e) => setFormData({ ...formData, customerPhone: e.target.value })}
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
+                            <input
+                                type="email"
+                                name="customerEmail"
+                                placeholder="client@example.com"
+                                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-slate-700 dark:border-slate-600 dark:text-white sm:text-sm"
+                                value={formData.customerEmail}
+                                onChange={(e) => setFormData({ ...formData, customerEmail: e.target.value })}
+                            />
+                        </div>
+                    </div>
                     
                     {/* Date Selection */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

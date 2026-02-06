@@ -20,11 +20,18 @@ public class Order
     
     public Guid CustomerId { get; set; }
     public Customer? Customer { get; set; }
+    
+    public string CustomerName { get; set; } = string.Empty;
+    public string? CustomerEmail { get; set; }
+    public string? CustomerPhone { get; set; }
 
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
 
     public OrderStatus Status { get; set; } = OrderStatus.Draft;
+    
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime? UpdatedAt { get; set; }
 
     // Navigation properties
     public List<Booking> Bookings { get; set; } = new();

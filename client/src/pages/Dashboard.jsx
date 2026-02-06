@@ -121,7 +121,7 @@ export default function Dashboard() {
                 </div>
 
                 {/* Scrollable Grid Body */}
-                <div className="flex-1 overflow-y-auto overflow-x-auto relative">
+                <div className={clsx("flex-1 overflow-y-auto overflow-x-auto relative transition-all duration-300", selectedOrder ? "pb-[50vh]" : "")}>
                     <div className="flex min-w-[740px]">
                         {/* Left Column (Customers) - Sticky */}
                         <div className="w-[140px] sticky left-0 z-10 bg-surface-light dark:bg-surface-dark border-r border-border-light dark:border-border-dark flex flex-col shadow-[4px_0_10px_-5px_rgba(0,0,0,0.1)]">
@@ -139,9 +139,11 @@ export default function Dashboard() {
                                     {selectedOrder?.id === order.id && <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>}
                                     <div className="flex items-center gap-2">
                                         <div className="w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-[10px] font-bold text-blue-700 dark:text-blue-300">
-                                            {order.customerName.substring(0,2).toUpperCase()}
+                                            {(order.customerName || "??").substring(0,2).toUpperCase()}
                                         </div>
-                                        <span className="text-xs font-bold text-slate-900 dark:text-white truncate">{order.customerName}</span>
+                                        <span className="text-xs font-bold text-slate-900 dark:text-white truncate" title={order.customerName}>
+                                            {order.customerName || "Unknown Customer"}
+                                        </span>
                                     </div>
                                     <span className="text-[10px] text-slate-500 dark:text-slate-400 truncate pl-8">#{order.orderNumber}</span>
                                 </div>
@@ -219,6 +221,21 @@ function OrderBar({ order, weekStart, onClick }) {
     const left = startOffsetDays * dayWidth;
     const width = Math.max(durationDays * dayWidth, dayWidth / 7); // Min width 1 day roughly
 
+    // Determine icon
+    let icon = "inventory_2"; // default box
+    const firstBooking = order.bookings?.[0];
+    if (firstBooking) {
+            const articleName = firstBooking.articleName?.toLowerCase() || "";
+            // Furniture / Equipment specific
+            if (articleName.includes("chair") || articleName.includes("stuhl")) icon = "chair";
+            else if (articleName.includes("table") || articleName.includes("tisch")) icon = "table_restaurant";
+            // Vehicles
+            else if (articleName.includes("trailer") || articleName.includes("anhänger")) icon = "rv_hookup";
+            else if (articleName.includes("car") || articleName.includes("auto") || articleName.includes("transporter") || articleName.includes("bus")) icon = "local_shipping";
+            // Fallback based on type
+            else if (firstBooking.articleType === 0) icon = "directions_car"; // Individual items often vehicles
+    }
+
     return (
         <div 
             onClick={(e) => { e.stopPropagation(); onClick(); }}
@@ -227,14 +244,21 @@ function OrderBar({ order, weekStart, onClick }) {
         >
             <div className="flex items-center justify-evenly w-full text-white overflow-hidden">
                 <div className="flex flex-col items-center">
-                    <span className="material-symbols-outlined text-[16px]">rv_hookup</span>
+                    <span className="material-symbols-outlined text-[16px]">{icon}</span>
                 </div>
                 {width > 20 && (
                  <>
                     <div className="w-px h-6 bg-white/20"></div>
-                     <span className="text-[10px] font-bold leading-none mt-0.5 truncate px-1">
-                         #{order.orderNumber}
-                     </span>
+                     <div className="flex flex-col overflow-hidden pl-1">
+                        <span className="text-[10px] font-bold leading-none truncate block">
+                            #{order.orderNumber}
+                        </span>
+                        {firstBooking && (
+                             <span className="text-[9px] font-medium leading-none truncate opacity-80 mt-0.5">
+                                {firstBooking.articleName}
+                            </span>
+                        )}
+                     </div>
                  </>
                 )}
             </div>

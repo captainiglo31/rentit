@@ -28,7 +28,27 @@ i18n
             addOrder: "Add Order",
             customerName: "Customer Name",
             resource: "Resource",
-            status: "Status"
+            status: "Status",
+            categories: "Categories",
+            orderDetails: "Order Details",
+            phone: "Phone",
+            email: "Email",
+            rentalPeriod: "Rental Period",
+            startDate: "Start Date",
+            endDate: "End Date",
+            draft: "Draft",
+            confirmed: "Confirmed",
+            completed: "Completed",
+            cancelled: "Cancelled",
+            noArticles: "No articles",
+            editOrder: "Edit Order",
+            saveChanges: "Save Changes",
+            cancel: "Cancel",
+            cancelEditing: "Cancel Editing",
+            edited: "Edited",
+            created: "Created",
+            position: "Position",
+            unknownCategory: "Uncategorized"
           }
         }
       },
@@ -48,7 +68,27 @@ i18n
              addOrder: "Auftrag anlegen",
              customerName: "Kundenname",
              resource: "Ressource",
-             status: "Status"
+             status: "Status",
+             categories: "Kategorien",
+             orderDetails: "Auftragsdetails",
+             phone: "Telefon",
+             email: "E-Mail",
+             rentalPeriod: "Mietzeitraum",
+             startDate: "Startdatum",
+             endDate: "Enddatum",
+             draft: "Entwurf",
+             confirmed: "Bestätigt",
+             completed: "Abgeschlossen",
+             cancelled: "Storniert",
+             noArticles: "Keine Artikel",
+             editOrder: "Auftrag bearbeiten",
+             saveChanges: "Änderungen speichern",
+             cancel: "Abbrechen",
+             cancelEditing: "Bearbeitung abbrechen",
+             edited: "Bearbeitet",
+             created: "Erstellt",
+             position: "Position",
+             unknownCategory: "Unkategorisiert"
           }
         }
       }

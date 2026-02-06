@@ -6,6 +6,10 @@ public class CreateOrderDto
 {
     [Required]
     public Guid CustomerId { get; set; }
+
+    public string? CustomerName { get; set; } 
+    public string? CustomerEmail { get; set; }
+    public string? CustomerPhone { get; set; }
     
     [Required]
     public DateTime StartDate { get; set; }
@@ -44,11 +48,25 @@ public class OrderDto
     public string OrderNumber { get; set; } = string.Empty;
     public Guid CustomerId { get; set; }
     public string CustomerName { get; set; } = string.Empty;
+    public string? CustomerEmail { get; set; }
+    public string? CustomerPhone { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
     public OrderStatus Status { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
     public List<BookingDto> Bookings { get; set; } = new();
     public List<OrderPositionDto> CustomPositions { get; set; } = new();
+}
+
+public class UpdateOrderDto
+{
+    public DateTime? StartDate { get; set; }
+    public DateTime? EndDate { get; set; }
+    public OrderStatus? Status { get; set; }
+    public string? CustomerName { get; set; }
+    public string? CustomerEmail { get; set; }
+    public string? CustomerPhone { get; set; }
 }
 
 public class BookingDto
@@ -56,6 +74,8 @@ public class BookingDto
     public Guid Id { get; set; }
     public Guid ArticleId { get; set; }
     public string ArticleName { get; set; } = string.Empty;
+    public string? CategoryName { get; set; }
+    public ArticleType ArticleType { get; set; } // Add Type info
     public DateTime StartTime { get; set; }
     public DateTime EndTime { get; set; }
 }
